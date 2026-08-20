@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiBookOpen, FiRepeat, FiLayers, FiArrowRight, FiCheck } from 'react-icons/fi';
+import { FiBookOpen, FiRepeat, FiLayers, FiArrowRight } from 'react-icons/fi';
 
 /**
  * HomePage Component
- * Modern landing page introducing LibraryHub with Hero section, Feature highlights,
- * How It Works step guide, and Call-To-Action banners.
+ * Modern landing page with pure CSS entrance animations, floating decorative elements,
+ * feature highlights, and responsive CTA banners.
  */
 function HomePage() {
   return (
@@ -13,12 +13,12 @@ function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="hero-section">
         <div className="hero-content">
-          <span className="hero-badge">Library Management Simplified</span>
-          <h1 className="hero-title">Manage Your Library, Simply.</h1>
-          <p className="hero-description">
+          <span className="hero-badge animate-fade-up delay-1">Library Management Simplified</span>
+          <h1 className="hero-title animate-fade-up delay-2">Manage Your Library, Simply.</h1>
+          <p className="hero-description animate-fade-up delay-3">
             LibraryHub helps you explore our collection of books and manage borrowing information in one streamlined platform.
           </p>
-          <div className="hero-cta-group">
+          <div className="hero-cta-group animate-fade-up delay-4">
             <Link to="/books" className="btn btn-primary">
               <span>Explore Books</span>
               <FiArrowRight className="btn-icon" />
@@ -30,9 +30,9 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Hero Visual Area (CSS & Icon Composition) */}
-        <div className="hero-visual">
-          <div className="hero-card-preview">
+        {/* Hero Visual Area with Floating Animation */}
+        <div className="hero-visual animate-fade-up delay-4">
+          <div className="hero-card-preview float-anim">
             <div className="preview-header">
               <FiBookOpen className="preview-icon" />
               <div className="preview-lines">
@@ -51,14 +51,14 @@ function HomePage() {
 
       {/* 2. FEATURES SECTION */}
       <section className="features-section">
-        <div className="section-header text-center">
+        <div className="section-header text-center animate-fade-up delay-1">
           <h2>Core Features</h2>
           <p>Everything you need for effortless book exploration and management.</p>
         </div>
 
         <div className="features-grid">
           {/* Feature 1 */}
-          <div className="feature-card">
+          <div className="feature-card animate-fade-up delay-2">
             <div className="feature-icon-wrapper">
               <FiBookOpen className="feature-icon" />
             </div>
@@ -67,7 +67,7 @@ function HomePage() {
           </div>
 
           {/* Feature 2 */}
-          <div className="feature-card">
+          <div className="feature-card animate-fade-up delay-3">
             <div className="feature-icon-wrapper">
               <FiRepeat className="feature-icon" />
             </div>
@@ -76,7 +76,7 @@ function HomePage() {
           </div>
 
           {/* Feature 3 */}
-          <div className="feature-card">
+          <div className="feature-card animate-fade-up delay-4">
             <div className="feature-icon-wrapper">
               <FiLayers className="feature-icon" />
             </div>
@@ -88,25 +88,25 @@ function HomePage() {
 
       {/* 3. HOW IT WORKS SECTION */}
       <section className="how-it-works-section">
-        <div className="section-header text-center">
+        <div className="section-header text-center animate-fade-up delay-1">
           <h2>How It Works</h2>
           <p>Three simple steps to borrow your favorite books.</p>
         </div>
 
         <div className="steps-grid">
-          <div className="step-card">
+          <div className="step-card animate-fade-up delay-2">
             <div className="step-number">1</div>
             <h3>Explore Books</h3>
             <p>Browse through our catalog of available books across various genres and categories.</p>
           </div>
 
-          <div className="step-card">
+          <div className="step-card animate-fade-up delay-3">
             <div className="step-number">2</div>
             <h3>Choose a Book</h3>
             <p>Select the book you wish to borrow and check its availability status in real time.</p>
           </div>
 
-          <div className="step-card">
+          <div className="step-card animate-fade-up delay-4">
             <div className="step-number">3</div>
             <h3>Submit Borrowing Details</h3>
             <p>Fill out the simple borrowing form with member details and loan dates.</p>
@@ -115,7 +115,7 @@ function HomePage() {
       </section>
 
       {/* 4. FINAL CALL TO ACTION */}
-      <section className="final-cta-section">
+      <section className="final-cta-section animate-fade-up delay-2">
         <div className="final-cta-content">
           <h2>Ready to Explore the Library?</h2>
           <p>Discover your next read or request a book loan in seconds.</p>
