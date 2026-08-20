@@ -81,6 +81,26 @@
   margin-bottom: 1.5rem;
 }
 
+/* Status Boxes (Loading & Error Messages) */
+.status-box {
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.loading-box {
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+}
+
+.error-box {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
 /* Books Grid & BookCard */
 .books-grid {
   display: grid;

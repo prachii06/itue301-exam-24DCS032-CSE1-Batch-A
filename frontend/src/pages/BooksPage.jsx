@@ -1,63 +1,84 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import BookCard from '../components/BookCard';
 
 /**
  * BooksPage Component
- * Demonstrates component composition and passing props to BookCard.
- * Uses a hardcoded array of sample books for Task 1.
+ * Fetches book catalog data dynamically from Express REST API (GET /api/v1/books).
+ * Demonstrates useEffect lifecycle hook, async/await fetch, and state management (data, loading, error).
  */
 function BooksPage() {
-  // Hardcoded array of sample books for Step 1 props demonstration
-  const sampleBooks = [
-    {
-      id: 1,
-      title: 'The Great Gatsby',
-      author: 'F. Scott Fitzgerald',
-      category: 'Classic Fiction',
-      available: true
-    },
-    {
-      id: 2,
-      title: 'To Kill a Mockingbird',
-      author: 'Harper Lee',
-      category: 'Classic Fiction',
-      available: false
-    },
-    {
-      id: 3,
-      title: 'Clean Code',
-      author: 'Robert C. Martin',
-      category: 'Programming',
-      available: true
-    },
-    {
-      id: 4,
-      title: '1984',
-      author: 'George Orwell',
-      category: 'Dystopian',
-      available: false
-    }
-  ];
+  // State variables for managing API request state
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // useEffect runs when component mounts
+  useEffect(() => {
+    // Asynchronous function to fetch books from backend
+    const fetchBooks = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Fetch books from Express API
+        const response = await fetch('http://localhost:5000/api/v1/books');
+
+        if (!response.ok) {
+          throw new Error(`Server returned HTTP status ${response.status}`);
+        }
+
+        const booksData = await response.json();
+        setData(booksData); // Update data state with fetched books
+      } catch (err) {
+        console.error('API Fetch Error:', err);
+        setError('Failed to load books from Express backend server. Make sure backend is running on port 5000.');
+      } finally {
+        setLoading(false); // Stop loading indicator regardless of outcome
+      }
+    };
+
+    fetchBooks();
+  }, []); // Empty dependency array ensures fetch executes once on component mount
 
   return (
     <section className="page-section books-section">
       <h2>Books Catalog</h2>
       <p className="section-description">
-        Demonstrating parent-to-child prop passing using the reusable <code>BookCard</code> component.
+        Displaying real-time book data fetched from Express REST API (<code>GET /api/v1/books</code>).
       </p>
 
-      {/* Grid rendering BookCard for each sample book */}
-      <div className="books-grid">
-        {sampleBooks.map((book) => (
-          <BookCard
-            key={book.id}
-            title={book.title}
-            author={book.author}
-            category={book.category}
-            available={book.available}
-          />
-        ))}
-      </div>
+      {/* 1. Loading State UI */}
+      {loading && (
+        <div className="status-box loading-box">
+          <p>⌛ Loading books from backend API...</p>
+        </div>
+      )}
+
+      {/* 2. Error State UI */}
+      {error && (
+        <div className="status-box error-box">
+          <p>⚠️ {error}</p>
+        </div>
+      )}
+
+      {/* 3. Successful Data Render using BookCard composition */}
+      {!loading && !error && (
+        <div className="books-grid">
+          {data.length > 0 ? (
+            data.map((book) => (
+              <BookCard
+                key={book.id}
+                title={book.title}
+                author={book.author}
+                category={book.category}
+                available={book.available}
+              />
+            ))
+          ) : (
+            <p>No books available in the catalog.</p>
+          )}
+        </div>
+      )}
     </section>
   );
 }

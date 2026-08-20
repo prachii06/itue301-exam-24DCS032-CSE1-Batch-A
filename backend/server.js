@@ -1,9 +1,19 @@
+const path = require('path');
+// Load environment variables from root .env file
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
+
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+
 const requestLogger = require('./middleware/requestLogger');
+const Member = require('./models/Member');
+const Book = require('./models/Book');
+const Borrowing = require('./models/Borrowing');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/library_db';
 
 // Enable JSON body parsing & CORS
 app.use(express.json());
@@ -12,7 +22,20 @@ app.use(cors());
 // Apply custom request logger middleware globally
 app.use(requestLogger);
 
-// In-Memory Data Storage for Task 3
+// ----------------------------------------------------
+// MongoDB Connection via Mongoose (Task 5)
+// ----------------------------------------------------
+mongoose.connect(MONGO_URI)
+  .then(() => {
+    console.log('✅ Connected to MongoDB successfully');
+  })
+  .catch((err) => {
+    console.error('❌ MongoDB Connection Error:', err.message);
+  });
+
+// ----------------------------------------------------
+// In-Memory Data Storage (Preserved for Tasks 1-4)
+// ----------------------------------------------------
 const books = [
   {
     id: 1,
@@ -59,11 +82,13 @@ const borrowings = [
   }
 ];
 
-// REST Endpoints
+// ----------------------------------------------------
+// Preserved In-Memory REST Endpoints (Tasks 3 & 4)
+// ----------------------------------------------------
 
 /**
  * GET /api/v1/books
- * Returns all books from the in-memory store.
+ * Returns all books from the in-memory store for Task 4 React integration.
  */
 app.get('/api/v1/books', (req, res) => {
   res.status(200).json(books);
@@ -79,7 +104,7 @@ app.get('/api/v1/borrowings', (req, res) => {
 
 /**
  * POST /api/v1/borrowings
- * Creates a new borrowing record and stores it in the in-memory array.
+ * Creates a new borrowing record in the in-memory array.
  */
 app.post('/api/v1/borrowings', (req, res) => {
   const { memberId, bookId, borrowDate, returnDate, status } = req.body;
@@ -97,8 +122,50 @@ app.post('/api/v1/borrowings', (req, res) => {
   res.status(201).json(newBorrowing);
 });
 
+// ----------------------------------------------------
+// MongoDB & Mongoose Endpoint (Task 5 Demonstration)
+// ----------------------------------------------------
+
+/**
+ * POST /api/v1/members
+ * Creates and saves a new Member document in MongoDB using Mongoose.
+ * Demonstrates schema validation and Mongoose operations.
+ */
+app.post('/api/v1/members', async (req, res, next) => {
+  try {
+    const member = new Member(req.body);
+    const savedMember = await member.save();
+    res.status(201).json(savedMember);
+  } catch (err) {
+    next(err); // Pass error to global error handler
+  }
+});
+
+// ----------------------------------------------------
 // Global Error Handling Middleware (MUST BE PLACED LAST)
+// ----------------------------------------------------
 app.use((err, req, res, next) => {
+  // Catch Mongoose Schema Validation Errors (HTTP 400)
+  if (err.name === 'ValidationError') {
+    const errorMessages = Object.values(err.errors).map((e) => e.message);
+    return res.status(400).json({
+      success: false,
+      message: 'Validation failed',
+      errors: errorMessages
+    });
+  }
+
+  // Catch Mongoose Duplicate Key Errors (e.g. Unique Email / ISBN - HTTP 400)
+  if (err.code === 11000) {
+    const field = Object.keys(err.keyPattern || {})[0] || 'field';
+    return res.status(400).json({
+      success: false,
+      message: 'Validation failed',
+      errors: [`Duplicate value for ${field}. Value must be unique.`]
+    });
+  }
+
+  // General Unhandled Server Errors (HTTP 500)
   console.error('Unhandled Server Error:', err.message);
   res.status(500).json({
     success: false,
@@ -108,5 +175,5 @@ app.use((err, req, res, next) => {
 
 // Start Express Server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
