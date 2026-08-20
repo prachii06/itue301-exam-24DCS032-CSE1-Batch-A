@@ -1,22 +1,11 @@
 import React from 'react';
 import { FiUser, FiTag, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 
-/**
- * BookCard Component
- * Reusable component for displaying book information.
- * 
- * Props:
- * - title (string)
- * - author (string)
- * - category (string)
- * - available (boolean)
- */
 function BookCard({ title, author, category, available }) {
   return (
     <div className="book-card">
       <div className="book-card-header">
         <h3 className="book-title">{title}</h3>
-        {/* Availability Badge */}
         <span className={`status-badge ${available ? 'status-available' : 'status-unavailable'}`}>
           {available ? (
             <>

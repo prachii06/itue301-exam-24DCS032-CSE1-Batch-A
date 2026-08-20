@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import { FiUser, FiBook, FiCalendar, FiCheckSquare, FiInfo } from 'react-icons/fi';
 
-/**
- * BorrowPage Component
- * Demonstrates React useState hook for controlled form management.
- * State updates dynamically as the user types into input fields.
- */
 function BorrowPage() {
   const [memberName, setMemberName] = useState('');
   const [bookTitle, setBookTitle] = useState('');
@@ -22,7 +17,6 @@ function BorrowPage() {
       </div>
 
       <div className="borrow-layout">
-        {/* Form Container */}
         <div className="form-card">
           <form className="borrow-form" onSubmit={(e) => e.preventDefault()}>
             <div className="form-group">
@@ -81,7 +75,6 @@ function BorrowPage() {
           </form>
         </div>
 
-        {/* Dynamic Live Summary (Demonstrates controlled components) */}
         <div className="live-summary">
           <div className="summary-header">
             <FiCheckSquare className="summary-title-icon" />
@@ -100,7 +93,6 @@ function BorrowPage() {
           )}
         </div>
 
-        {/* Guidelines Box */}
         <div className="guidelines-box">
           <h4>
             <FiInfo className="guidelines-icon" />

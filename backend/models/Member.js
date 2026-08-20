@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * Member Schema
- * Represents a library member/borrower.
- */
 const memberSchema = new mongoose.Schema({
   name: {
     type: String,

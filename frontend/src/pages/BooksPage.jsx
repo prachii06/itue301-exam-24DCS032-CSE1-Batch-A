@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import BookCard from '../components/BookCard';
 import { FiLoader, FiAlertCircle, FiBookOpen } from 'react-icons/fi';
 
-/**
- * BooksPage Component
- * Fetches book catalog data dynamically from Express REST API (GET /api/v1/books).
- * Demonstrates useEffect lifecycle hook, async/await fetch, and state management (data, loading, error).
- */
 function BooksPage() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,7 +41,6 @@ function BooksPage() {
         </p>
       </div>
 
-      {/* 1. Loading State UI */}
       {loading && (
         <div className="status-box loading-box">
           <FiLoader className="spin-icon status-box-icon" />
@@ -54,7 +48,6 @@ function BooksPage() {
         </div>
       )}
 
-      {/* 2. Error State UI */}
       {error && (
         <div className="status-box error-box">
           <FiAlertCircle className="status-box-icon" />
@@ -62,7 +55,6 @@ function BooksPage() {
         </div>
       )}
 
-      {/* 3. Successful Data Render using BookCard composition */}
       {!loading && !error && (
         <div className="books-grid">
           {data.length > 0 ? (

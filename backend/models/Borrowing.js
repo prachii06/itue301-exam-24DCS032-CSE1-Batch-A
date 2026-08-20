@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * Borrowing Schema
- * Represents a borrowing transaction linking a Member to a Book.
- */
 const borrowingSchema = new mongoose.Schema({
   memberId: {
     type: mongoose.Schema.Types.ObjectId,

@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * Book Schema
- * Represents a book in the library collection.
- */
 const bookSchema = new mongoose.Schema({
   title: {
     type: String,

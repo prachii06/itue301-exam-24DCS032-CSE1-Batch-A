@@ -2,22 +2,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FiBookOpen, FiHome, FiBook, FiRepeat } from 'react-icons/fi';
 
-/**
- * Navigation Component
- * Modern floating pill navbar with glassmorphism backdrop blur and responsive layout.
- * Uses react-icons and NavLink for zero-reload client-side routing.
- */
 function Navigation() {
   return (
     <header className="navbar">
       <div className="nav-container">
-        {/* Left: Brand / Logo */}
         <NavLink to="/" className="brand-logo">
           <FiBookOpen className="brand-icon" />
           <span>LibraryHub</span>
         </NavLink>
 
-        {/* Right: Navigation Links */}
         <nav className="nav-links">
           <NavLink 
             to="/" 

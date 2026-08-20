@@ -2,15 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiBookOpen, FiRepeat, FiLayers, FiArrowRight } from 'react-icons/fi';
 
-/**
- * HomePage Component
- * Modern landing page with pure CSS entrance animations, floating decorative elements,
- * feature highlights, and responsive CTA banners.
- */
 function HomePage() {
   return (
     <div className="home-container">
-      {/* 1. HERO SECTION */}
       <section className="hero-section">
         <div className="hero-content">
           <span className="hero-badge animate-fade-up delay-1">Library Management Simplified</span>
@@ -30,7 +24,6 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Hero Visual Area with Floating Animation */}
         <div className="hero-visual animate-fade-up delay-4">
           <div className="hero-card-preview float-anim">
             <div className="preview-header">
@@ -49,7 +42,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 2. FEATURES SECTION */}
       <section className="features-section">
         <div className="section-header text-center animate-fade-up delay-1">
           <h2>Core Features</h2>
@@ -57,7 +49,6 @@ function HomePage() {
         </div>
 
         <div className="features-grid">
-          {/* Feature 1 */}
           <div className="feature-card animate-fade-up delay-2">
             <div className="feature-icon-wrapper">
               <FiBookOpen className="feature-icon" />
@@ -66,7 +57,6 @@ function HomePage() {
             <p>Browse and explore books available in the library with real-time status updates.</p>
           </div>
 
-          {/* Feature 2 */}
           <div className="feature-card animate-fade-up delay-3">
             <div className="feature-icon-wrapper">
               <FiRepeat className="feature-icon" />
@@ -75,7 +65,6 @@ function HomePage() {
             <p>Manage borrowing details through a simple and organized controlled form process.</p>
           </div>
 
-          {/* Feature 3 */}
           <div className="feature-card animate-fade-up delay-4">
             <div className="feature-icon-wrapper">
               <FiLayers className="feature-icon" />
@@ -86,7 +75,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 3. HOW IT WORKS SECTION */}
       <section className="how-it-works-section">
         <div className="section-header text-center animate-fade-up delay-1">
           <h2>How It Works</h2>
@@ -114,7 +102,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 4. FINAL CALL TO ACTION */}
       <section className="final-cta-section animate-fade-up delay-2">
         <div className="final-cta-content">
           <h2>Ready to Explore the Library?</h2>
