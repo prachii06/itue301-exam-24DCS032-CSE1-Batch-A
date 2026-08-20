@@ -1,35 +1,44 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { FiBookOpen, FiHome, FiBook, FiRepeat } from 'react-icons/fi';
 
 /**
  * Navigation Component
- * Header navigation bar using React Router's NavLink for client-side navigation.
- * Prevents full-page reloads when navigating between routes.
+ * Modern top navigation header featuring LibraryHub logo and active route indicators.
+ * Uses react-icons for vector icons (no emojis) and NavLink for zero-reload client routing.
  */
 function Navigation() {
   return (
     <header className="navbar">
       <div className="nav-container">
-        <h1 className="logo">📚 Library Book System</h1>
+        {/* Brand / Logo */}
+        <NavLink to="/" className="brand-logo">
+          <FiBookOpen className="brand-icon" />
+          <span>LibraryHub</span>
+        </NavLink>
+
+        {/* Navigation Links */}
         <nav className="nav-links">
-          {/* NavLink components manage active route styling and client-side routing */}
           <NavLink 
             to="/" 
             className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
           >
-            Home
+            <FiHome className="nav-icon" />
+            <span>Home</span>
           </NavLink>
           <NavLink 
             to="/books" 
             className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
           >
-            Books
+            <FiBook className="nav-icon" />
+            <span>Books</span>
           </NavLink>
           <NavLink 
             to="/borrow" 
             className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
           >
-            Borrow
+            <FiRepeat className="nav-icon" />
+            <span>Borrow</span>
           </NavLink>
         </nav>
       </div>

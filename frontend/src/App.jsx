@@ -27,7 +27,7 @@ function App() {
 
       {/* Footer */}
       <footer className="footer">
-        <p>© 2026 Library Book Management System - Task 2</p>
+        <p>© 2026 Library Book Management System</p>
       </footer>
     </div>
   );

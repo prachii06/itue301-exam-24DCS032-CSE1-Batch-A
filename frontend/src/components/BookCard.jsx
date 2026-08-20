@@ -1,27 +1,49 @@
 import React from 'react';
+import { FiUser, FiTag, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 
 /**
  * BookCard Component
- * Reusable component to display information about a single book.
+ * Reusable component for displaying book information.
  * 
- * Props received from parent component:
- * - title (string): Title of the book
- * - author (string): Author of the book
- * - category (string): Category or genre of the book
- * - available (boolean): Availability status (true = Available, false = Not Available)
+ * Props:
+ * - title (string)
+ * - author (string)
+ * - category (string)
+ * - available (boolean)
  */
 function BookCard({ title, author, category, available }) {
   return (
     <div className="book-card">
-      <div className="book-header">
+      <div className="book-card-header">
         <h3 className="book-title">{title}</h3>
-        {/* Visually distinct availability badge based on 'available' prop */}
+        {/* Availability Badge */}
         <span className={`status-badge ${available ? 'status-available' : 'status-unavailable'}`}>
-          {available ? 'Available' : 'Not Available'}
+          {available ? (
+            <>
+              <FiCheckCircle className="badge-icon" />
+              <span>Available</span>
+            </>
+          ) : (
+            <>
+              <FiXCircle className="badge-icon" />
+              <span>Not Available</span>
+            </>
+          )}
         </span>
       </div>
-      <p className="book-info"><strong>Author:</strong> {author}</p>
-      <p className="book-info"><strong>Category:</strong> {category}</p>
+
+      <div className="book-details">
+        <p className="book-detail-item">
+          <FiUser className="detail-icon" />
+          <span className="detail-label">Author:</span>
+          <span className="detail-value">{author}</span>
+        </p>
+        <p className="book-detail-item">
+          <FiTag className="detail-icon" />
+          <span className="detail-label">Category:</span>
+          <span className="detail-value category-tag">{category}</span>
+        </p>
+      </div>
     </div>
   );
 }
